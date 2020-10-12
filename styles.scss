@@ -1,0 +1,171 @@
+$max_width: 1200px;
+
+// Primary Colors
+$red: hsl(0, 78%, 62%);
+$cyan: hsl(180, 62%, 55%);
+$orange: hsl(34, 97%, 64%);
+$blue: hsl(212, 86%, 64%);
+
+:root {
+  --colorCard: #{$cyan};
+}
+
+// Neutral Colors
+
+$veryDarkBlue: hsl(234, 12%, 34%);
+$grayishBlue: hsl(229, 6%, 66%);
+$veryLightGray: hsl(0, 0%, 98%);
+
+$breakpoints: (
+  s: 480px,
+  m: 680px,
+  sm: 768px,
+  l: 1200px,
+  x: 1400px,
+);
+
+@mixin from($bp) {
+  @if (map-has-key($breakpoints, $bp)) {
+    @media screen and (min-width: map-get($breakpoints , $bp )) {
+      @content;
+    }
+  } @else {
+    @media screen and (min-width: $bp) {
+      @content;
+    }
+  }
+}
+
+html {
+  font-size: 62.5%;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: $veryLightGray;
+  font-family: 'Poppins', sans-serif;
+}
+.l-container {
+  max-width: $max_width;
+  margin: 0 auto;
+}
+.main-content {
+  min-height: 100vh;
+}
+.main-header {
+  text-align: center;
+  padding: 2rem;
+  margin: 3rem 0 3rem 0;
+}
+.title--ligth {
+  color: $grayishBlue;
+  font-weight: lighter;
+}
+.title--darken {
+  color: $veryDarkBlue;
+}
+.paragraph {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  color: $grayishBlue;
+}
+.cards-contain {
+  height: calc(100vh - 200px);
+  position: absolute;
+  @include from(sm) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include from(l) {
+    position: relative;
+    grid-template-columns: repeat(3, 1fr);
+    // align-items: center;
+    height: calc(100vh - 100px);
+    justify-items: center;
+    // background-color: cornflowerblue;
+  }
+}
+.card {
+  background-color: #fff;
+  box-shadow: 13px 17px 74px -23px $grayishBlue;
+  border-radius: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  justify-items: end;
+  margin: 2rem;
+  position: relative;
+  padding: 2em;
+
+  &::after {
+    content: '';
+    display: block;
+    height: 3px;
+    position: absolute;
+    width: 100%;
+    background-color: var(--colorCard);
+  }
+  &:nth-child(1) {
+    @include from(l) {
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0;
+    }
+  }
+  &:nth-child(2) {
+    --colorCard: #{$red};
+    @include from(l) {
+      top: 25%;
+    }
+    @include from(x) {
+      top: 20%;
+      transform: translateY(-20%);
+    }
+  }
+  &:nth-child(3) {
+    --colorCard: #{$orange};
+    @include from(l) {
+      top: 50%;
+      transform: translateY(-50%);
+      right: 0;
+    }
+  }
+  &:nth-child(4) {
+    --colorCard: #{$blue};
+
+    @include from(l) {
+      bottom: 10%;
+    }
+    @include from(x) {
+      bottom: 1%;
+    }
+  }
+  @include from(l) {
+    position: absolute;
+    width: 30%;
+  }
+}
+
+.card__data {
+  // background-color: cornflowerblue;
+  padding: 0.5rem;
+  font-size: 1.7rem;
+  grid-column: span 3;
+  > h2,
+  p {
+    margin: 0.5rem;
+  }
+}
+h2 {
+  font-size: 2rem;
+}
+.card__content-image {
+  // background-color: red;
+  grid-column: span 3;
+  padding: 1rem;
+}
