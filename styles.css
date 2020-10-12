@@ -44,6 +44,12 @@ body {
   color: #4c4e61;
 }
 
+@media screen and (min-width: 1200px) {
+  .title--darken {
+    font-size: 4rem;
+  }
+}
+
 .paragraph {
   margin-top: 1rem;
   font-size: 1.5rem;

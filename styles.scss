@@ -68,6 +68,9 @@ body {
 }
 .title--darken {
   color: $veryDarkBlue;
+  @include from(l) {
+    font-size: 4rem;
+  }
 }
 .paragraph {
   margin-top: 1rem;
